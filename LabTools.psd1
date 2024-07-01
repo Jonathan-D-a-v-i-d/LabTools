@@ -23,7 +23,7 @@
     RequiredModules = @('PSRemoting')
 
     # Functions to export from this module
-    FunctionsToExport = @('Obfuscate_Pack') #, 'Next_Function')
+    FunctionsToExport = @('Obfuscate-Pack') #, 'Next_Function')
 
 
     # List of all files packaged with this module
