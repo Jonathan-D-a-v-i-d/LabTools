@@ -9,7 +9,7 @@ function Connect-Remotely {
 
     $passwordSecure = ConvertTo-SecureString $Password -AsPlainText -Force
     $credential = New-Object System.Management.Automation.PSCredential ($Username, $passwordSecure)
-    $session = New-PSSession -ComputerName $TargetMachine -Credential $credential
+    $session = Enter-PSSession -ComputerName $TargetMachine -Credential $credential
     
     # Store the session in a global variable
     $global:RemoteSession = $session
