@@ -7,7 +7,7 @@
 #                                                          __/ |
 #                                                         |___/                                             
 . "$PSScriptRoot\Functions\Obfuscate_Pack.ps1"
-
+. "$PSScriptRoot\Functions\Connect_Remotely.ps1"
 
 
 
@@ -27,4 +27,4 @@
 # |______/_/\_\ .__/ \___/|_|   \__|_|_| |_|\__, | |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/  \__,_|___/  \_____|_| |_| |_|\__,_|______\___|\__|___/
 #             | |                            __/ |                                                                                                      
 #             |_|                           |___/                                                                                                                                                                                                    
-Export-ModuleMember -Function Obfuscate_Pack#, Next_Function
+Export-ModuleMember -Function Obfuscate-Pack, Connect-Remotely
