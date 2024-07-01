@@ -1,8 +1,8 @@
 # LabTools
 
-This repo is designed to be a swiss army knife for all lab needs when dealing in offensive security,
-for the sake of testing defense systems for proper alert/prevention engineering rules, and overall technical 
-product testing to really trigger alerts in great systems accross windows based environments.
+This repo is designed to be a swiss army knife for all Windows cyber lab needs when dealing in offensive security,
+    for the sake of testing defense systems for proper alert/prevention engineering rules, and overall technical 
+    product testing to really trigger alerts in great systems accross Windows based environments.
 
 Originally developed for use by the Technical Product Enablement team at Palo Alto Networks for Cortex testing, 
 the LOTL style incorporated in the Powershell commands will prove suitable for all Windows lab environments 
@@ -23,3 +23,12 @@ lab settings to trigger alerts accross Early Availability Cortex Products.
 - [Github](https://github.com/Jonathan-D-a-v-i-d)
 - [Medium](https://jonathan-david.medium.com/about)
 - [LinkedIn](https://linkedin.com/in/j-o-n-d-a-v-i-d)
+
+
+
+
+
+
+
+
+
