@@ -45,16 +45,26 @@ function Invoke-DomainShadowing {
             $nslookupResult = nslookup -type=txt $query $ServerAddress 2>$null
             if ($nslookupResult -match "Non-existent domain|NXDOMAIN") {
                 $status = "Failed To Send"
-                $colorCode = "`e[31;40m"  # Red text on black background
+                $foregroundColor = "Red"
             } else {
                 $status = "Successfully Sent"
-                $colorCode = "`e[32;40m"  # Green text on black background
+                $foregroundColor = "Green"
             }
-            Write-Output @{"Chunk Status" = "[*] $($colorCode)$status`e[0m"; "Query" = "[*] $($colorCode)$query`e[0m"}
+            $outputObj = [PSCustomObject]@{
+                "Chunk Status" = "[*] $status"
+                "Query" = "[*] $query"
+            }
+            Write-Host ("Chunk Status: " + $outputObj."Chunk Status") -ForegroundColor $foregroundColor -BackgroundColor Black
+            Write-Host ("Query: " + $outputObj.Query) -ForegroundColor $foregroundColor -BackgroundColor Black
         } catch {
             $status = "Failed To Send"
-            $colorCode = "`e[31;40m"  # Red text on black background
-            Write-Output @{"Chunk Status" = "[*] $($colorCode)$status`e[0m"; "Query" = "[*] $($colorCode)$query`e[0m"}
+            $foregroundColor = "Red"
+            $outputObj = [PSCustomObject]@{
+                "Chunk Status" = "[*] $status"
+                "Query" = "[*] $query"
+            }
+            Write-Host ("Chunk Status: " + $outputObj."Chunk Status") -ForegroundColor $foregroundColor -BackgroundColor Black
+            Write-Host ("Query: " + $outputObj.Query) -ForegroundColor $foregroundColor -BackgroundColor Black
         }
     }
 }
