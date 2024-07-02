@@ -50,13 +50,13 @@ function Remove-RemoteSession {
 
 # Example usage
 # Creating a session and invoking a command immediately
-Connect-Remotely -TargetMachine "target_machine" -Username "your_username" -Password "your_password" -Command { Get-Process }
+# Connect-Remotely -TargetMachine "target_machine" -Username "your_username" -Password "your_password" -Command { Get-Process }
 
 # Creating a session without invoking a command
-Connect-Remotely -TargetMachine "target_machine" -Username "your_username" -Password "your_password"
+# Connect-Remotely -TargetMachine "target_machine" -Username "your_username" -Password "your_password"
 
 # Running a command using the existing session
-Invoke-RemoteCommand -Command { Get-Service }
+# Invoke-RemoteCommand -Command { Get-Service }
 
 # Removing the session
-Remove-RemoteSession
+# Remove-RemoteSession
