@@ -18,12 +18,11 @@ function New-Administrators {
             if ($isAdmin) {
                 Write-Host "[*] You are Local Admin" -ForegroundColor Green -BackgroundColor Black
             } else {
-                Write-Host "[*] You are not local admin, elevate to Local Admin before using this script" -ForegroundColor Red -BackgroundColor Black
-                exit
+                Write-Host "[*] You are not local admin, elevate to Local Admin before using this script" -ForegroundColor Red -BackgroundColor Black     
             }
+            
         } catch {
             Write-Host "[*] An error occurred while checking local admin status: $_" -ForegroundColor Red -BackgroundColor Black
-            exit
         }
     }
 
@@ -46,7 +45,6 @@ function New-Administrators {
             }
             default {
                 Write-Host "[*] Unknown group specified" -ForegroundColor Red -BackgroundColor Black
-                exit
             }
         }
 
@@ -72,7 +70,7 @@ function New-Administrators {
                     Write-Host "[*] User $username already exists" -ForegroundColor Yellow -BackgroundColor Black
                 }
             } catch {
-                Write-Host "[*] Failed to create user $username: $_" -ForegroundColor Red -BackgroundColor Black
+                Write-Host "[*] Failed to create user $($username): $_" -ForegroundColor Red -BackgroundColor Black
             }
         }
     }
