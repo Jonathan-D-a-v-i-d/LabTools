@@ -38,9 +38,10 @@ function New-Administrators {
         switch ($Group) {
             "Arctic Monkeys" {
                 $users = @(
-                    @{Username="user1"; Description="Description1"; Password=$Password},
-                    @{Username="user2"; Description="Description2"; Password=$Password},
-                    @{Username="user3"; Description="Description3"; Password=$Password}
+                    @{Username="Alex Turner"; Description="Lead singer of the Arctic Monkeys"; Password=$Password},
+                    @{Username="Matt Helders"; Description="Drummer of the Arctic Monkeys"; Password=$Password},
+                    @{Username="Jamie Cook"; Description="Lead Guitarist of the Arctic Monkeys"; Password=$Password},
+                    @{Username="Nick O'Malley"; Description="Bass Guitarist of the Arctic Monkeys"; Password=$Password}
                 )
             }
             default {
@@ -55,10 +56,17 @@ function New-Administrators {
                 $description = $user.Description
                 $password = $user.Password
 
+                # Checks if the user doesn't already exist
+                # -------------------------------------- #
                 if (-not (Get-LocalUser -Name $username -ErrorAction SilentlyContinue)) {
+                    # Creates local user 
                     New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -Description $description -FullName $username -UserMayNotChangePassword -PasswordNeverExpires
+                    # Adds local user to Administrators
                     Add-LocalGroupMember -Group "Administrators" -Member $username
+                    # Enables local user
                     Enable-LocalUser -Name $username
+
+                    # try/catch
                     Write-Host "[*] User $username created and added to Administrators group" -ForegroundColor Green -BackgroundColor Black
                 } else {
                     Write-Host "[*] User $username already exists" -ForegroundColor Yellow -BackgroundColor Black
