@@ -1,0 +1,10 @@
+# Step 1: Download PowerShell installer
+$url = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.0/PowerShell-7.2.0-win-x64.msi"
+$output = "$env:TEMP\PowerShell-7.2.0-win-x64.msi"
+Invoke-WebRequest -Uri $url -OutFile $output
+
+# Step 2: Install PowerShell
+Start-Process msiexec.exe -ArgumentList "/i $output /quiet /norestart" -Wait -NoNewWindow
+
+# Step 3: Verify installation
+& "C:\Program Files\PowerShell\7\pwsh.exe" -Command '$PSVersionTable'
