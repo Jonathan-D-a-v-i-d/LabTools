@@ -5,10 +5,10 @@ function Obfuscate-Pack {
         [string]$Directory,
 
         [Parameter(Mandatory=$false)]
-        [string]$FileExtension,
+        [string[]]$FileExtensions,
 
         [Parameter(Mandatory=$false)]
-        [string]$Keyword,
+        [string[]]$Keywords,
 
         [Parameter(Mandatory=$true)]
         [string]$ZipName,
@@ -41,8 +41,8 @@ function Obfuscate-Pack {
     # Collect files based on parameters
     try {
         $files = Get-ChildItem -Path $Directory -Recurse -File | Where-Object {
-            ($FileExtension -and $_.Extension -eq $FileExtension) -or
-            ($Keyword -and $_.Name -match $Keyword)
+            ($FileExtensions -and $_.Extension -in $FileExtensions) -or
+            ($Keywords -and ($Keywords | ForEach-Object { $_.Name -match $_ }))
         }
     } catch {
         Write-NegativeOutput "Error collecting files: $_"
